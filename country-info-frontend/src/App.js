@@ -10,13 +10,17 @@ import usePagination from './hooks/usePagination';
 import { fetchCountryByName, fetchCountryByCode, fetchRegion, fetchSubregion } from './services/api';
 
 function App() {
-    const { countries, error: countriesError } = useCountries();
+    const { countries } = useCountries();
     const { currentPage, itemsPerPage, setItemsPerPage, paginate } = usePagination(50);
+
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [selectedRegion, setSelectedRegion] = useState(null);
     const [selectedSubregion, setSelectedSubregion] = useState(null);
     const [error, setError] = useState(null);
+
+    // State to manage search term and filter type
     const [searchTerm, setSearchTerm] = useState('');
+    const [filterType, setFilterType] = useState('country'); // 'country', 'region', 'subregion'
 
     const handleCountryClick = (identifier, type) => {
         const fetchCountry = type === 'code' ? fetchCountryByCode : fetchCountryByName;
@@ -59,14 +63,28 @@ function App() {
         paginate(1); // Reset to first page on search
     };
 
+    const handleFilterTypeChange = (event) => {
+        setFilterType(event.target.value);
+        setSearchTerm(''); // Clear search term when filter type changes
+        paginate(1); // Reset to first page on filter change
+    };
+
     const handleRecordsPerPageChange = (event) => {
         setItemsPerPage(Number(event.target.value));
         paginate(1); // Reset to first page on change
     };
 
-    const filteredCountries = countries.filter(country =>
-        country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // Filter countries based on search term and filter type
+    const filteredCountries = countries.filter(country => {
+        if (filterType === 'country') {
+            return country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
+        } else if (filterType === 'region') {
+            return country.region.toLowerCase().includes(searchTerm.toLowerCase());
+        } else if (filterType === 'subregion') {
+            return country.subregion.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return false;
+    });
 
     const indexOfLastCountry = currentPage * itemsPerPage;
     const indexOfFirstCountry = indexOfLastCountry - itemsPerPage;
@@ -75,7 +93,13 @@ function App() {
     return (
         <div className="App">
             <h1>Country Information</h1>
-            <SearchInput searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
+            {/* Search input component with filter type */}
+            <SearchInput
+                searchTerm={searchTerm}
+                handleSearchChange={handleSearchChange}
+                filterType={filterType}
+                handleFilterTypeChange={handleFilterTypeChange}
+            />
             <div className="content-container">
                 <div className="table-container">
                     <CountryTable

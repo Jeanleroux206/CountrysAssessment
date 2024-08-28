@@ -1,5 +1,6 @@
 import React from 'react';
 
+// DetailSection component to display details of the selected country, region, or subregion
 const DetailSection = ({ selectedCountry, selectedRegion, selectedSubregion, handleCountryClick, handleRegionClick, handleSubregionClick }) => {
     return (
         <div className="detail-container">

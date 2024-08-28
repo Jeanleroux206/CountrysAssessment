@@ -1,5 +1,6 @@
 import React from 'react';
 
+// RecordsPerPageSelector component to select the number of records per page
 const RecordsPerPageSelector = ({ countriesPerPage, handleRecordsPerPageChange }) => {
     return (
         <div className="records-per-page">

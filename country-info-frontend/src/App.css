@@ -12,8 +12,8 @@ body {
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow: auto; /* Ensure the container can scroll */
-  height: 100vh; /* Full viewport height */
+  overflow: auto;
+  height: 100vh;
 }
 
 h1 {
@@ -21,11 +21,26 @@ h1 {
   color: #333;
 }
 
+/* Search Input Container */
+.search-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
 /* Search Input */
 .search-input {
-  width: 100%;
+  width: 70%;
   padding: 10px;
-  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Filter Type Selector */
+.filter-type-selector {
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -65,6 +80,7 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #fafafa;
+  position: -webkit-sticky;
   position: sticky;
   top: 20px;
   height: fit-content;
@@ -125,11 +141,4 @@ h1 {
 .pagination button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
-}
-
-/* Error Message */
-.error {
-  color: red;
-  text-align: center;
-  margin-top: 20px;
 }

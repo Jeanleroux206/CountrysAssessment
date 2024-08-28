@@ -1,14 +1,22 @@
 import React from 'react';
 
-const SearchInput = ({ searchTerm, handleSearchChange }) => {
+// SearchInput component to handle the search input and filter type
+const SearchInput = ({ searchTerm, handleSearchChange, filterType, handleFilterTypeChange }) => {
     return (
-        <input
-            type="text"
-            placeholder="Search countries..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className="search-input"
-        />
+        <div className="search-input-container">
+            <input
+                type="text"
+                className="search-input"
+                placeholder={`Search for a ${filterType}...`}
+                value={searchTerm}
+                onChange={handleSearchChange}
+            />
+            <select className="filter-type-selector" value={filterType} onChange={handleFilterTypeChange}>
+                <option value="country">Country</option>
+                <option value="region">Region</option>
+                <option value="subregion">Subregion</option>
+            </select>
+        </div>
     );
 };
 

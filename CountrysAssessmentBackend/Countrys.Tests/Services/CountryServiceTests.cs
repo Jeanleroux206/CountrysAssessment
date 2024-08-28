@@ -25,11 +25,10 @@ namespace Countrys.Tests.Services
         {
             _mockCache = new Mock<IMemoryCache>();
             _mockWebCommunicatorBroker = new Mock<IWebCommunicatorBroker>();
-            // Setup for TryGetValue
+
             _mockCache.Setup(m => m.TryGetValue(It.IsAny<object>(), out It.Ref<object>.IsAny))
                       .Returns(false);
 
-            // Setup for CreateEntry
             var mockCacheEntry = new Mock<ICacheEntry>();
             _mockCache.Setup(m => m.CreateEntry(It.IsAny<object>()))
                       .Returns(mockCacheEntry.Object);

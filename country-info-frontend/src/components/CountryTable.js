@@ -1,5 +1,6 @@
 import React from 'react';
 
+// CountryTable component to display a table of countries
 const CountryTable = ({ countries, handleCountryClick, handleRegionClick, handleSubregionClick }) => {
     return (
         <table className="country-table">
