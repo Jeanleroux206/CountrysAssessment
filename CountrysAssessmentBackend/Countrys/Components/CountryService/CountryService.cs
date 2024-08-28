@@ -46,29 +46,29 @@ namespace Countrys.Components.CountryService
         /// <summary>
         /// Retrieves a country by its name, with caching.
         /// </summary>
-        /// <param name="name">The name of the country.</param>
-        public async Task<Country> GetCountryByNameAsync(string name)
+        /// <param countryName="countryName">The name of the country.</param>
+        public async Task<Country> GetCountryByNameAsync(string countryName)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(countryName))
             {
-                throw new ArgumentNullException(nameof(name), "Country name cannot be null or empty.");
+                throw new ArgumentNullException(nameof(countryName), "Country name cannot be null or empty.");
             }
 
             try
             {
-                if (!_cache.TryGetValue($"country_name_{name}", out Country country))
+                if (!_cache.TryGetValue($"country_name_{countryName}", out Country country))
                 {
-                    string fullUrl = $"{BaseUrl}/name/{name}";
+                    string fullUrl = $"{BaseUrl}/name/{countryName}";
                     var countries = await GetDataFromWebBrokerAsync<List<Country>>(fullUrl);
-                    country = countries.FirstOrDefault() ?? throw new KeyNotFoundException($"No countries found with the name {name}.");
+                    country = countries.FirstOrDefault() ?? throw new KeyNotFoundException($"No countries found with the name {countryName}.");
 
-                    _cache.Set($"country_name_{name}", country, TimeSpan.FromHours(1));
+                    _cache.Set($"country_name_{countryName}", country, TimeSpan.FromHours(1));
                 }
                 return country;
             }
             catch (Exception ex)
             {
-                throw new Exception($"An error occurred while retrieving the country with name {name}.", ex);
+                throw new Exception($"An error occurred while retrieving the country with name {countryName}.", ex);
             }
         }
 
@@ -76,28 +76,28 @@ namespace Countrys.Components.CountryService
         /// Retrieves a country by its code, with caching.
         /// </summary>
         /// <param name="code">The code of the country.</param>
-        public async Task<Country> GetCountryByCodeAsync(string code)
+        public async Task<Country> GetCountryByCodeAsync(string countryCode)
         {
-            if (string.IsNullOrWhiteSpace(code))
+            if (string.IsNullOrWhiteSpace(countryCode))
             {
-                throw new ArgumentNullException(nameof(code), "Country code cannot be null or empty.");
+                throw new ArgumentNullException(nameof(countryCode), "Country code cannot be null or empty.");
             }
 
             try
             {
-                if (!_cache.TryGetValue($"country_code_{code}", out Country country))
+                if (!_cache.TryGetValue($"country_code_{countryCode}", out Country country))
                 {
-                    string fullUrl = $"{BaseUrl}/alpha/{code}";
+                    string fullUrl = $"{BaseUrl}/alpha/{countryCode}";
                     var countries = await GetDataFromWebBrokerAsync<List<Country>>(fullUrl);
-                    country = countries.FirstOrDefault() ?? throw new KeyNotFoundException($"No countries found with the code {code}.");
+                    country = countries.FirstOrDefault() ?? throw new KeyNotFoundException($"No countries found with the code {countryCode}.");
 
-                    _cache.Set($"country_code_{code}", country, TimeSpan.FromHours(1));
+                    _cache.Set($"country_code_{countryCode}", country, TimeSpan.FromHours(1));
                 }
                 return country;
             }
             catch (Exception ex)
             {
-                throw new Exception($"An error occurred while retrieving the country with code {code}.", ex);
+                throw new Exception($"An error occurred while retrieving the country with code {countryCode}.", ex);
             }
         }
 
