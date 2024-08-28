@@ -1,0 +1,135 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: auto; /* Ensure the container can scroll */
+  height: 100vh; /* Full viewport height */
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Search Input */
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Records Per Page Selector */
+.records-per-page {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.records-per-page label {
+  margin-right: 10px;
+}
+
+.records-per-page select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Content Container */
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Table Container */
+.table-container {
+  flex: 2;
+}
+
+/* Detail Container */
+.detail-container {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fafafa;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.detail-section h2 {
+  margin-top: 0;
+}
+
+/* Country Table */
+.country-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.country-table th, .country-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.country-table th {
+  background-color: #f0f0f0;
+}
+
+.country-table td {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.country-table td:hover {
+  color: #0056b3;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
